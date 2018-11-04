@@ -53,11 +53,13 @@ public class Recipe implements Comparable<Recipe> {
         this.url = url;
         this.direction = direction;
         this.difficulty = difficulty;
+        ingredients.forEach(i -> i.setRecipe(this));
         this.ingredients = ingredients;
+        categories.forEach(c -> c.getRecipes().add(this));
         this.categories = categories;
         this.image = image;
+        notes.setRecipe(this);
         this.notes = notes;
-        this.notes.setRecipe(this);
     }
 
     @Override
