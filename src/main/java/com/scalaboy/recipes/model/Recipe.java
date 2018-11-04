@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Recipe {
+public class Recipe implements Comparable<Recipe> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +57,12 @@ public class Recipe {
         this.categories = categories;
         this.image = image;
         this.notes = notes;
+        this.notes.setRecipe(this);
+    }
+
+    @Override
+    public int compareTo(Recipe recipe) {
+        if (recipe == null) return 1;
+        return Long.compare(this.id, recipe.id);
     }
 }

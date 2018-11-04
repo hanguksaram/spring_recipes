@@ -2,9 +2,9 @@ package com.scalaboy.recipes.controllers;
 
 import com.scalaboy.recipes.model.Category;
 import com.scalaboy.recipes.model.UnitOfMeasure;
-import com.scalaboy.recipes.repositories.CategoryRepository;
-import com.scalaboy.recipes.repositories.UnitOfMeasureRepository;
+import com.scalaboy.recipes.services.RecipeService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
@@ -12,19 +12,16 @@ import java.util.Optional;
 @Controller
 public class IndexController {
 
-    private final CategoryRepository categoryRepository;
-    private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final RecipeService recipeService;
 
-    public IndexController(CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
+    public IndexController(RecipeService recipeService) {
+        this.recipeService = recipeService;
     }
 
+
     @RequestMapping({"/", "", "/index", "/index.html"})
-    public String index() {
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("Americn");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspon");
-        System.out.printf("Cat Id is: %s uom is: %s ", categoryOptional.map(x -> x.getDescription()).orElse("No such category"), unitOfMeasureOptional.map(x -> x.getDescription()).orElse("No such uom"));
+    public String index(Model model) {
+        model.addAttribute("recipes", recipeService.getRecipes());
         return "index";
     }
 }
