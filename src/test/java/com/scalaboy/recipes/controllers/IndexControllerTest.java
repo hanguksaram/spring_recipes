@@ -52,7 +52,7 @@ public class IndexControllerTest {
 
     @SneakyThrows
     @Test
-    public void getIndexServiceInteraction() {
+    public void getRecipes() {
        //given
         Set<Recipe> recipes = new HashSet<Recipe>(){{add(new Recipe()); add(new Recipe());}};
         when(recipeService.getRecipes()).thenReturn(recipes);

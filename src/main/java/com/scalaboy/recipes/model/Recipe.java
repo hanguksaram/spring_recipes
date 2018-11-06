@@ -42,6 +42,10 @@ public class Recipe implements Comparable<Recipe> {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
+    public Recipe(Long id) {
+        this.id = id;
+    }
+
     @Builder
     public Recipe(String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url,
                   String direction, Difficulty difficulty, Set<Ingredient> ingredients, Set<Category> categories, Byte[] image, Notes notes) {

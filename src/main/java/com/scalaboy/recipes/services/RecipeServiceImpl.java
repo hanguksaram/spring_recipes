@@ -4,6 +4,7 @@ import com.scalaboy.recipes.model.Recipe;
 import com.scalaboy.recipes.repositories.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -21,5 +22,10 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Set<Recipe> getRecipes() {
         return StreamSupport.stream(recipeRepository.findAll().spliterator(), false).collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    @Override
+    public Optional<Recipe> findById(Long id) {
+        return this.recipeRepository.findById(id);
     }
 }
