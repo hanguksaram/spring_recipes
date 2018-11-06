@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<table>
+<table th:if="${not #lists.isEmpty(recipes)}">
     <thead>
     <th>Id</th>
     <th>Description</th>

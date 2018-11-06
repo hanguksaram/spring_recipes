@@ -64,7 +64,7 @@ public class Recipe implements Comparable<Recipe> {
 
     @Override
     public int compareTo(Recipe recipe) {
-        if (recipe == null) return 1;
+        if (recipe == null || recipe.id == null) return 1;
         return Long.compare(this.id, recipe.id);
     }
 }
