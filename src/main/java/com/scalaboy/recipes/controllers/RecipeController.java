@@ -1,11 +1,14 @@
 package com.scalaboy.recipes.controllers;
 
+import com.scalaboy.recipes.dtos.RecipeDto;
 import com.scalaboy.recipes.model.Recipe;
 import com.scalaboy.recipes.services.RecipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
@@ -40,5 +43,9 @@ public class RecipeController {
         }
 
 
+    }
+    @PostMapping
+    public String createRecipe(@ModelAttribute RecipeDto recipeDto) {
+        return "redirect:/recipe/show/1";
     }
 }

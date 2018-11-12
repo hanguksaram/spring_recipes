@@ -3,11 +3,13 @@ package com.scalaboy.recipes.controllers;
 import com.scalaboy.recipes.model.Recipe;
 import com.scalaboy.recipes.services.RecipeService;
 import lombok.SneakyThrows;
+import org.hibernate.validator.constraints.br.TituloEleitoral;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,6 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -50,6 +53,13 @@ public class RecipeControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
 
+    }
+    @SneakyThrows
+    @Test
+    public void createNewRecipe() {
+        mockMvc.perform(post("/recipe")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection());
     }
     @SneakyThrows
     @Test
